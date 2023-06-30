@@ -1,15 +1,20 @@
-<h1>New game</h1>
-<div class="d-flex align-items-center">
-  <%@letters.each do |letter| %>
-    <span><%=letter%></span>
-  <% end %>
-</div>
+<div class="container mt-5">
+  <h1 class="mb-4">New Game</h1>
 
-<form action="/score" method="get" data-turbo="false" class="d-flex p-2">
-  <%= hidden_field_tag :letters, @letters %>
-  <div class="m-4 container">
-    <p>whats the longest word you can find?</p>
-    <input type="text" name="answer" class="form-control col-lg-8">
-    <input type="submit" value="Play" class="btn btn-primary">
-  </div>
-</form>
+  <ul class="letters">
+    <% @letters.each do |letter| %>
+      <li><%= letter %></li>
+    <% end %>
+  </ul>
+
+  <p class="form-prefix">What is the longest word you can find from the above letters?</p>
+
+  <form action="/score" method="get" data-turbo="false" class="d-flex p-2">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <%= hidden_field_tag :letters, @letters %>
+    <div class="input-group">
+      <input type="text" name="answer" placeholder="Enter a Word" class="form-control col-lg-8">
+      <input type="submit" value="Play" class="btn btn-primary ms-3">
+    </div>
+  </form>
+</div>

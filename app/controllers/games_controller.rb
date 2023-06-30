@@ -10,9 +10,9 @@ class GamesController < ApplicationController
   def score
     @answer = params[:answer].upcase.split("")
     @letters = params[:letters]
+    @english_word = english_word?(@answer)
+    @included = included?(@answer, @letters)
     @grid = @letters
-    p @grid
-    p @answer
       if @answer.all? { |letter| @answer.count(letter) <= @grid.count(letter) }
         if english_word?(@answer)
           @string = "CONGRATS! #{@answer.join} is a valid English Word"
@@ -22,6 +22,11 @@ class GamesController < ApplicationController
       else
         @string = "sorry but #{@answer.join} can't be built out of: #{@grid}"
       end
+  end
+
+
+  def included?(answer, letters)
+    answer.all? { |letter| answer.count(letter) <= letters.count(letter) }
   end
 
   def english_word?(word)

@@ -1,5 +1,21 @@
-<h1>Result</h1>
+<div class="container mt-5">
 
-<%= @string %>
+  <h1>Result</h1>
 
-<%= link_to "Play again", new_path %>
+
+  <% if @included %>
+
+    <% if @english_word %>
+      <p class="form-prefix"><%= @string %></p>
+    <% else %>
+      <p class="form-prefix"><%= @string %></p>
+    <% end %>
+
+  <% else %>
+    <p class="form-prefix"><%= @string %></p>
+  <% end %>
+
+<%= link_to "Play again", new_path, class: "btn btn-primary mt-2" %>
+
+
+</div>
